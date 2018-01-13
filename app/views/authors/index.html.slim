@@ -5,19 +5,11 @@ table
     tr
       th Name
       th Stailo
-      th
-      th
-      th
-
   tbody
     - @authors.each do |author|
       tr
-        td = author.name
-        td = author.stailo
-        td = link_to 'Show', author
-        td = link_to 'Edit', edit_author_path(author)
-        td = link_to 'Destroy', author, data: { confirm: 'Are you sure?' }, method: :delete
-
+        td = link_to author.name, author
+        td = author.hongim
 br
 
 = link_to 'New Author', new_author_path
