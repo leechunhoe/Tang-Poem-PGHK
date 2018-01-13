@@ -1,15 +1,10 @@
-h1 Listing authors
-
-table
-  thead
-    tr
-      th Name
-      th Stailo
-  tbody
-    - @authors.each do |author|
-      tr
-        td = link_to author.name, author
-        td = author.hongim
-br
-
-= link_to 'New Author', new_author_path
+h1.text-center 詩人
+- @authors.each_slice(3) do |authors|
+  .row.artist-row
+    - authors.each do |author|
+      .col-md-4.text-center.artist-cell
+        = link_to author
+          h2
+            = author.name
+          h3
+            = author.hongim
