@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Hanji:
+  = @poem.hanji
+p
+  strong Stailo:
+  = @poem.stailo
+p
+  strong Hongim:
+  = @poem.hongim
+
+=> link_to 'Edit', edit_poem_path(@poem)
+'|
+=< link_to 'Back', poems_path

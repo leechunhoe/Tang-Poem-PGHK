@@ -1,0 +1,18 @@
+= form_for @poem do |f|
+  - if @poem.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@poem.errors.count, "error")} prohibited this poem from being saved:"
+      ul
+        - @poem.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :hanji
+    = f.text_field :hanji
+  .field
+    = f.label :stailo
+    = f.text_field :stailo
+  .field
+    = f.label :hongim
+    = f.text_field :hongim
+  .actions = f.submit

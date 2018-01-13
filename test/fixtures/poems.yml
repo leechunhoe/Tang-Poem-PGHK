@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hanji: MyString
+  stailo: MyString
+  hongim: MyString
+
+two:
+  hanji: MyString
+  stailo: MyString
+  hongim: MyString
