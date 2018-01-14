@@ -1,12 +1,13 @@
-p#notice = notice
-
-p
-  strong Name:
-  = @author.name
-p
-  strong Stailo:
-  = @author.stailo
-
-=> link_to 'Edit', edit_author_path(@author)
-'|
-=< link_to 'Back', authors_path
+nav aria-label="breadcrumb" style="border-radius: 0;"
+	ol.breadcrumb
+		li.breadcrumb-item
+			a href="/"  主頁
+		li.breadcrumb-item
+			a href="/authors/"  詩人
+		li.breadcrumb-item.active aria-current="page"
+			= @author.name
+.text-center#artist-header
+	h6
+		= @author.hongim
+	h1
+		= @author.name

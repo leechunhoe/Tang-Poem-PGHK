@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+ /**
+ * Tested on Bootstrap 3.3.2 
+ * Usage: <button class="btn btn-transparent" type="button">Click me</button>
+ */

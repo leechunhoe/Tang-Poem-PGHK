@@ -5,6 +5,7 @@ $primary-color: #9C27B0;
 $primary-color-light: #E1BEE7;
 $accent-color: #FFC107;
 $accent-color-translucent: rgba(0, 128, 128, 0.3); //#FFC107;
+$standard-background-color: rgba(256, 256, 256, 0.3); //#FFC107;
 $primary-text: #212121;
 
 $standard-margin: 50px;
@@ -19,7 +20,29 @@ html {
 
 body {
 	background-color: transparent !important;
+
+	a {
+  		@extend .senseless-hyperlink;
+  		transition: color 0.5s ease;
+
+	  	&:hover {
+	  		@extend .senseless-hyperlink;
+	  		background-color: transparent !important;
+	  		color: #8B0000 !important;
+	  	}
+  }
 }
+
+#main-title {
+	margin-top: 30vh;
+}
+
+.breadcrumb {
+	border-radius: 0 !important;
+	background-color: $standard-background-color !important;
+	margin-bottom: 0 !important;
+}
+
 
 .artist-row {
 	background-color: transparent;
@@ -30,24 +53,25 @@ body {
 	margin-bottom: $standard-margin; 
 }
 
-
+#artist-header {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
 
 .artist-cell {
 	padding-top: $standard-margin;
 	padding-bottom: $standard-margin;
 	background-color: transparent;
-	transition: background-color 0.5s ease;
+	transition: background-color 1s ease;
 	&:hover {
-		background-color: $accent-color-translucent;
+		background-color: $standard-background-color;
 		a {
-			@extend .senseless-hyperlink;
 			color: $primary-text;
 		}
 	}	
 
 	a {
 		color: $primary-text;
-		@extend .senseless-hyperlink;
 	}
 }
 

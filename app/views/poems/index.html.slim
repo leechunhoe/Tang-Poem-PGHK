@@ -1,25 +1,16 @@
-h1 Listing poems
+.text-right
+	.btn-group.btn-group-phonetic.px-2.py-2 aria-label=("Phonetic Script") role="group" 
+		button.btn.btn-phonetic type="button"  tai5-lo5
+		button.btn.btn-phonetic type="button"  ㄏㆲ ㄧㆬ 
+
+
+.text-center
+  h1#main-title 唐詩三百首
+  a.h2 href="/authors/" 拜訪詩人
 
 table
-  thead
-    tr
-      th Hanji
-      th Stailo
-      th Hongim
-      th
-      th
-      th
-
   tbody
     - @poems.each do |poem|
       tr
-        td = poem.hanji
-        td = poem.stailo
-        td = poem.hongim
+        td = poem.title
         td = link_to 'Show', poem
-        td = link_to 'Edit', edit_poem_path(poem)
-        td = link_to 'Destroy', poem, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
-= link_to 'New Poem', new_poem_path
