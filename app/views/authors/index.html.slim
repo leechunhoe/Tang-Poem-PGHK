@@ -1,10 +1,12 @@
-h1.text-center 詩人
+.text-center.title
+  h6 ㄒㄧ ㆢㄧㄣˊ
+  h1 詩人
 - @authors.each_slice(3) do |authors|
   .row.artist-row
     - authors.each do |author|
       .col-md-4.text-center.artist-cell
         = link_to author
-          h2
-            = author.name
-          h3
+          h6
             = author.hongim
+          h1
+            = author.name
