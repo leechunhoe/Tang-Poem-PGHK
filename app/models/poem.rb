@@ -1,4 +1,91 @@
 class Poem < ApplicationRecord
+	has_one :author
+	def author
+		return Author.find_by(:id => self.author_id)
+	end
+
+	def hanji_with_hongim
+		punctuations = ["。","「","」","，","？","．"]
+		tone_marks = [" ","ˋ","˪","ㆴ˙","ㆵ˙","ㆶ˙","ㆷ˙","ㆴ","ㆵ","ㆶ","ㆷ","ˊ","˫"]
+		special_tone_marks = ["ㆴ","ㆵ","ㆶ","ㆷ"]
+
+		result = []
+		hanji_array = self.hanji.split("\n")
+		hongim_array = self.hongim.split("\n")
+		for index in (0...hanji_array.length)
+			hanjis = hanji_array[index]
+			hongims = hongim_array[index]
+			sentence = ""
+			for j in (0...hanjis.length)
+				if punctuations.include?(hongims[0])
+					sentence += "<ruby>" + hanjis[j] + "</ruby>"
+					hongims.slice! hongims[0]
+				else
+					hongim_combo = ""
+
+					if hongims == nil or hongims.length == 0
+						sentence += "<ruby>" + hanjis[j] + "</ruby>"
+					else
+						while hongims != nil and !tone_marks.include?(hongims[0])
+							if hongims == nil or hongims[0] == nil
+								break
+							else
+								hongim_combo += hongims[0]
+								hongims.slice! hongims[0]
+							end
+						end
+
+						if hongims != nil
+							if hongims.length > 1
+								candidate_tone = hongims[0]
+								if special_tone_marks.include?(candidate_tone)
+									# When end with p, t, k, which might include dot after it
+									candidate_tone_2 = hongims[0] + hongims[1]
+									if tone_marks.include?(candidate_tone_2)
+										# Is p, t, k with dot
+										hongim_combo += candidate_tone_2
+										hongims.slice! hongims[0]
+										hongims.slice! hongims[0]
+									else
+										# Is p, t, k without dot
+										hongim_combo += hongims[0]
+										hongims.slice! hongims[0]
+									end
+								else
+									if tone_marks.include?(hongims[0])
+										hongim_combo += hongims[0]
+										hongims.slice! hongims[0]
+									end
+								end
+							elsif hongims.length > 0
+								if tone_marks.include?(hongims[0])
+									hongim_combo += hongims[0]
+									hongims.slice! hongims[0]
+								end
+							end
+						end
+						sentence += "<ruby>" + hanjis[j] + "<rt>" + hongim_combo + "</rt></ruby>"
+					end
+				end
+			end
+			result << sentence
+			result << "\n"
+		end
+		return result
+	end
+
+	def hanji_with_stailo
+		result = []
+		hanji_array = self.hanji.split("\n")
+		stailo_array = self.stailo.split("\n")
+		for index in (0...hanji_array.length)
+			result << stailo_array[index]
+			result << hanji_array[index]
+			result << "\n"
+		end
+		return result
+	end
+
 	def self.import_from_file
 		is_header = true
 		author = ""
@@ -45,6 +132,7 @@ class Poem < ApplicationRecord
 		author = Author.where(name: author).take!
 
 		puts author.inspect
+		Poem.where(:title => title, :author_id => author.id).destroy_all
 		Poem.create!(:author_id => author.id, :title => title, :hanji => hanji, :hongim => hongim, :stailo => tailo)
 	end
 

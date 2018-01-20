@@ -6,11 +6,13 @@
 
 .text-center
   h1#main-title 唐詩三百首
-  a.h2 href="/authors/" 拜訪詩人
+  a.h2 href="/authors/" 訪詩人
 
-table
-  tbody
-    - @poems.each do |poem|
-      tr
-        td = poem.title
-        td = link_to 'Show', poem
+br
+
+- @poems.each do |poem|
+  .row
+    .col-md-4
+    .col-md-4.text-center
+      h2 = link_to "#{poem.author.name} #{poem.title}", poem
+    .col-md-4

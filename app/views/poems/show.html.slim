@@ -1,15 +1,22 @@
-p#notice = notice
+nav aria-label="breadcrumb" style="border-radius: 0;"
+	ol.breadcrumb
+		li.breadcrumb-item
+			a href="/"  主頁
+		li.breadcrumb-item
+			a href="/authors/"  詩人
+		li.breadcrumb-item
+			a href="/authors/#{@poem.author.id}"
+				= @poem.author.name
+		li.breadcrumb-item.active aria-current="page"
+			= @poem.title
 
-p
-  strong Hanji:
-  = @poem.hanji
-p
-  strong Stailo:
-  = @poem.stailo
-p
-  strong Hongim:
-  = @poem.hongim
-
-=> link_to 'Edit', edit_poem_path(@poem)
-'|
-=< link_to 'Back', poems_path
+.text-center style="margin-top:20vh;"
+	h1
+		= @poem.title
+	h3
+		= @poem.author.name
+	br
+	- @poem.hanji_with_hongim.each do |line|
+		h1
+			= raw line
+		br
