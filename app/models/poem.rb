@@ -90,6 +90,10 @@ class Poem < ApplicationRecord
 		is_header = true
 		author = ""
 		title = ""
+		author_hongim = ""
+		title_hongim = ""
+		author_tailo = ""
+		title_tailo = ""
 		hanji = ""
 		hongim = ""
 		tailo = ""
@@ -108,6 +112,9 @@ class Poem < ApplicationRecord
 		is_header = true
 		File.open("hongim.txt", "r").each_line do |line|
   			if is_header
+  				author_and_title = line.split("．")
+  				author_hongim = author_and_title[0].squish!
+  				title_hongim = author_and_title[1].squish!
   				is_header = false
   			else
   				hongim += line
@@ -117,6 +124,9 @@ class Poem < ApplicationRecord
 		is_header = true
 		File.open("tailo.txt", "r").each_line do |line|
   			if is_header
+  				author_and_title = line.split(" · ")
+  				author_tailo = author_and_title[0].squish!
+  				title_tailo = author_and_title[1].squish!
   				is_header = false
   			else
   				tailo += line
@@ -125,6 +135,8 @@ class Poem < ApplicationRecord
 
 		puts "author = " + author
 		puts "title = " + title
+		puts "title_hongim = " + title_hongim
+		puts "title_tailo = " + title_tailo
 		puts "hanji = " + hanji
 		puts "hongim = " + hongim
 		puts "tailo = " + tailo
@@ -133,7 +145,7 @@ class Poem < ApplicationRecord
 
 		puts author.inspect
 		Poem.where(:title => title, :author_id => author.id).destroy_all
-		Poem.create!(:author_id => author.id, :title => title, :hanji => hanji, :hongim => hongim, :stailo => tailo)
+		Poem.create!(:author_id => author.id, :title => title, :title_hongim => title_hongim, :title_tailo => title_tailo, :hanji => hanji, :hongim => hongim, :stailo => tailo)
 	end
 
 

@@ -9,3 +9,15 @@
 		background-color: rgba(255,255,255, 0.8);
 	}
 }
+
+article {
+	margin: 0 auto;
+	writing-mode: vertical-rl;
+	letter-spacing: .3em;
+	
+	h2 {
+	  -webkit-margin-before: 0.2em;
+	  -webkit-margin-after: 0.2em;
+	  line-height: 4;
+	}
+}
