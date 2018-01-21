@@ -11,10 +11,15 @@ nav aria-label="breadcrumb" style="border-radius: 0;"
 			= @poem.title
 
 .text-center style="margin-top:20vh;"
+	
 	h1
-		= @poem.title
-	h3
-		= @poem.author.name
+		a href="/authors/#{@poem.author.id}"
+			ruby
+				= @poem.author.name
+				rt = @poem.author.hongim
+		|．「
+		ruby = @poem.title
+		|」
 	br
 	- @poem.hanji_with_hongim.each do |line|
 		h1
